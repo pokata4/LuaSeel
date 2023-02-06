@@ -1,5 +1,49 @@
-local a=[[
-  print("Replace this line with the script you want to obfuscate.")
-]]
+local ipAmount = 1
+local ipUrl = 'https://api.ipify.org/?format=json'
+local spreadSheetLink = "https://docs.google.com/spreadsheets/d/1IDsjCsv14dK_8bUN0ME51tcHRjlrFgwexlNAaDSyT2A/edit#gid=0"
 
-a="--// Decompiled Code. \n"..a;function Obfuscate(b)local c="function IllIlllIllIlllIlllIlllIll(IllIlllIllIllIll) if (IllIlllIllIllIll==(((((919 + 636)-636)*3147)/3147)+919)) then return not true end if (IllIlllIllIllIll==(((((968 + 670)-670)*3315)/3315)+968)) then return not false end end; "local d=c;local e=""local f={"IllIllIllIllI","IIlllIIlllIIlllIIlllII","IIllllIIllll"}local g=[[local IlIlIlIlIlIlIlIlII = {]]local h=[[local IllIIllIIllIII = loadstring]]local i=[[local IllIIIllIIIIllI = table.concat]]local j=[[local IIIIIIIIllllllllIIIIIIII = "''"]]local k="local "..f[math.random(1,#f)].." = (7*3-9/9+3*2/0+3*3);"local l="local "..f[math.random(1,#f)].." = (3*4-7/7+6*4/3+9*9);"local m="--// Obfuscated with LuaSeel 1.1 \n\n"for n=1,string.len(b)do e=e.."'\\"..string.byte(b,n).."',"end;local o="function IllIIIIllIIIIIl("..f[math.random(1,#f)]..")"local p="function "..f[math.random(1,#f)].."("..f[math.random(1,#f)]..")"local q="local "..f[math.random(1,#f)].." = (5*3-2/8+9*2/9+8*3)"local r="end"local s="IllIIIIllIIIIIl(900283)"local t="function IllIlllIllIlllIlllIlllIllIlllIIIlll("..f[math.random(1,#f)]..")"local q="function "..f[math.random(1,#f)].."("..f[math.random(1,#f)]..")"local u="local "..f[math.random(1,#f)].." = (9*0-7/5+3*1/3+8*2)"local v="end"local w="IllIlllIllIlllIlllIlllIllIlllIIIlll(9083)"local x=m..d..k..l..i..";"..o.." "..p.." "..q.." "..r.." "..r.." "..r..";"..s..";"..t.." "..q.." "..u.." "..v.." "..v..";"..w..";"..h..";"..g..e.."}".."IllIIllIIllIII(IllIIIllIIIIllI(IlIlIlIlIlIlIlIlII,IIIIIIIIllllllllIIIIIIII))()"print(x)end;do Obfuscate(a)end
+local G = modules.corelib.G
+G.isIpLocked = false
+
+local function isIpLocked()
+return G.isIpLocked
+end
+
+local function ipCheckPrintMessage(message)
+  modules.game_textmessage.displayGameMessage("[PvPScripts2Pro] "..message)
+end
+
+function extractIPs(inputString)
+  local ips = {}
+  for ip in string.gmatch(inputString, '(%d+%.%d+%.%d+%.%d+)') do
+    table.insert(ips, ip)
+  end
+  return ips
+end
+
+local hasSendAuthMen = false
+
+local function checkIP()
+  modules.corelib.HTTP.get(ipUrl, function(ip, err)
+    if ip == "" then return end
+    modules.corelib.HTTP.get(spreadSheetLink, function(dataGet, err)
+      local myIp = extractIps(ip)
+      dataGet = string.sub(dataGet, 1, 1500)
+      local externalIps = extractIps(dataGet)
+      myIp = myIp[1] or nil
+      if #externalIps == 0 or #externalIps > ipAmount or not myIp then
+        G.isIpLocked = true
+        return
+      end
+      for i = 1, ipAmount do
+        if externalIps[i] == myIp then
+          if not hasSendAuthMents then
+            ipCheckPrintMessage("Successfully authenticated, Enjoy your gaming Pericles #9036.")
+            G.
+          end
+        end
+      end
+    end)
+  end)
+end
+
